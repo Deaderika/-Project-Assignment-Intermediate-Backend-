@@ -54,4 +54,13 @@ class TaskRepository
 		$id = $this->tasks->save($editedData);
 		return $id;
 	}
+
+	/**
+	 * Untuk menghapus task atau subtask
+	 *  */
+	public function delete(string $id)
+	{
+		$task = $this->tasks->deleteQuery(['_id'=>$id]);
+		return $task;
+	}
 }

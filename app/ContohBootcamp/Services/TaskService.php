@@ -53,7 +53,69 @@ class TaskService {
 			$editTask['description'] = $formData['description'];
 		}
 
-		$id = $this->taskRepository->save( $editTask);
+		$id = $this->taskRepository->save($editTask);
+		return $id;
+	}
+
+	/**
+	 * NOTE: UNTUK menghapus data task
+	 */
+	public function delete(string $taskId)
+	{
+		$task = $this->taskRepository->delete($taskId);
+		return $task;
+	}
+
+	/**
+	 * NOTE: untuk assign task
+	 */
+	public function assignTask(array $editTask, array $formData)
+	{
+		if(isset($formData['assigned']))
+		{
+			$editTask['assigned'] = $formData['assigned'];
+		}
+
+		$id = $this->taskRepository->save($editTask);
+		return $id;
+	}
+
+	/**
+	 * NOTE: untuk unassign task
+	 */
+	public function unassignTask(array $editTask)
+	{
+		$editTask['assigned'] = null;
+
+		$id = $this->taskRepository->save($editTask);
+		return $id;
+	}
+
+	/**
+	 * NOTE: untuk membuat subtask
+	 */
+	public function createSubtask(array $editTask, array $formData)
+	{
+		if(isset($formData))
+		{
+			$editTask['subtasks'] = $formData;
+		}
+
+		$id = $this->taskRepository->save($editTask);
+		return $id;
+	}
+
+	/**
+	 * NOTE: untuk menghapus subtask
+	 */
+	public function deleteSubtask(array $editTask, array $formData)
+	{
+		if(isset($formData))
+		{
+			$editTask['subtasks'] = $formData;
+		}
+
+		$id = $this->taskRepository->save($editTask);
 		return $id;
 	}
 }
